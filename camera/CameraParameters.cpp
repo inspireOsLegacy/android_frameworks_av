@@ -382,6 +382,10 @@ const char CameraParameters::FOCUS_MODE_MANUAL_POSITION[] = "manual";
 #if defined(QCOM_HARDWARE)
 const char CameraParameters::FOCUS_MODE_NORMAL[] = "normal";
 
+// Values for Oppo Find 7 additionnal settings
+const char CameraParameters::FOCUS_MODE_MANUAL_POSITION[] = "manual-focus-position";
+const char CameraParameters::WHITE_BALANCE_MANUAL_CCT[] = "wb-manual-cct";
+
 
 const char CameraParameters::KEY_SKIN_TONE_ENHANCEMENT[] = "skinToneEnhancement";
 const char CameraParameters::KEY_SUPPORTED_SKIN_TONE_ENHANCEMENT_MODES[] = "skinToneEnhancement-values";

@@ -936,9 +936,10 @@ public:
     // other modes.
     static const char FOCUS_MODE_CONTINUOUS_PICTURE[];
 
-#ifdef OPPO_CAMERA_HARDWARE
+    // Oppo Find 7 additionnal parameters 
     static const char FOCUS_MODE_MANUAL_POSITION[];
-#endif
+    static const char WHITE_BALANCE_MANUAL_CCT[];
+
 
     // Values for light special effects
     // Low-light enhancement mode
