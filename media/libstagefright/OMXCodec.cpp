@@ -188,6 +188,7 @@ struct OMXCodecObserver : public BnOMXObserver {
             codec->on_message(msg);
 
             bYieldToConsumer = codec->mIsEncoder &&
+                    !strncasecmp(codec->mMIME, "video/", 6) &&
                     (msg.type == omx_message::FILL_BUFFER_DONE ||
                     msg.type == omx_message::EMPTY_BUFFER_DONE);
             codec.clear();
@@ -658,6 +659,17 @@ status_t OMXCodec::configureCodec(const sp<MetaData> &meta) {
             addCodecSpecificData(
                     codec_specific_data, codec_specific_data_size);
 #ifdef QCOM_HARDWARE
+            }
+#endif
+#ifdef ENABLE_AV_ENHANCEMENTS
+            ALOGV("OMXCodec::configureCodec check for DP in ESDS atom");
+            if (!strncmp(mComponentName, "OMX.qcom.video.decoder.mpeg4",
+                         sizeof("OMX.qcom.video.decoder.mpeg4"))) {
+                bool isDP = ExtendedCodec::checkDPFromCodecSpecificData((const uint8_t*)data, size);
+                if (isDP) {
+                    ALOGE("H/W Decode Error: Data Partitioned bit set in the Header");
+                    return BAD_VALUE;
+                }
             }
 #endif
         } else if (meta->findData(kKeyAVCC, &type, &data, &size)) {
